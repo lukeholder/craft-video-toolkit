@@ -90,11 +90,9 @@ class Video
             
             $context = stream_context_create($opts);
 
-            try {
-                return json_decode(file_get_contents($oembedUrl, false, $context));
-            } catch (\Exception $e) {
-                return false;
-            }
+    
+            return json_decode(file_get_contents($oembedUrl, false, $context));
+        
         }
         return false;
     }
