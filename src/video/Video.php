@@ -83,7 +83,11 @@ class Video
         if ($oembedUrl = $this->getProviderOembedUrl()) {
             $oembedUrl .= $this->url;
     
-            return json_decode($this->get_content($oembedUrl));
+            $return = json_decode($this->get_content($oembedUrl));
+
+            if($return) {
+                return $return;
+            }
         
         }
         return false;
