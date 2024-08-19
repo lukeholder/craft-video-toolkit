@@ -82,8 +82,16 @@ class Video
     {
         if ($oembedUrl = $this->getProviderOembedUrl()) {
             $oembedUrl .= $this->url;
+            $opts = array(
+              'http'=>array(
+                'header'=> "Referer: https://www.tenina.com\r\n"
+              )
+            );
+            
+            $context = stream_context_create($opts);
+
             try {
-                return json_decode(file_get_contents($oembedUrl));
+                return json_decode(file_get_contents($oembedUrl, false, $context));
             } catch (\Exception $e) {
                 return false;
             }
