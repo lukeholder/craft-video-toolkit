@@ -84,7 +84,7 @@ class Video
             $oembedUrl .= $this->url;
             $opts = array(
               'http'=>array(
-                'header'=> "Referer: https://www.tenina.com\r\n"
+                'header'=> "Referer: https://tenina.com\r\n"
               )
             );
             
