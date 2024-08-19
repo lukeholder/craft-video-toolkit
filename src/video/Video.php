@@ -82,19 +82,20 @@ class Video
     {
         if ($oembedUrl = $this->getProviderOembedUrl()) {
             $oembedUrl .= $this->url;
-            $opts = array(
-              'http'=>array(
-                'header'=> "Referer: https://tenina.com\r\n"
-              )
-            );
-            
-            $context = stream_context_create($opts);
-
     
-            return json_decode(file_get_contents($oembedUrl, false, $context));
+            return json_decode($this->get_content($oembedUrl));
         
         }
         return false;
+    }
+
+    function get_content($URL){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $URL);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
     }
 
     public function isUrl(string $url): bool
